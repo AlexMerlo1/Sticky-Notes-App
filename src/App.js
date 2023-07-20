@@ -8,6 +8,7 @@ const App = () => {
   const [mouseY, setMouseY] = useState(0);
 
   useEffect(() => {
+    //app wide mouse move listener
     const handleMouseMove = (event) => {
       setMouseX(event.clientX);
       setMouseY(event.clientY);

@@ -23,8 +23,9 @@ const StickyNote = ({ mouseX, mouseY }) => {
   };
 
   if (mouseHold) {
-    posX.current = mouseX;
-    posY.current = mouseY;
+    //garbage bug fix
+    posX.current = mouseX - 10;
+    posY.current = mouseY - 10;
   }
 
   return (
