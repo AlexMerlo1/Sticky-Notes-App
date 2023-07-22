@@ -24,8 +24,8 @@ const StickyNote = ({ mouseX, mouseY }) => {
 
   if (mouseHold) {
     //garbage bug fix
-    posX.current = mouseX - 10;
-    posY.current = mouseY - 10;
+    posX.current = mouseX;
+    posY.current = mouseY;
   }
 
   return (
@@ -39,7 +39,7 @@ const StickyNote = ({ mouseX, mouseY }) => {
         position: mouseHold ? "absolute" : "",
       }}
     >
-      <p>note</p>
+      <input type="text" value={note} onChange={handleNoteChange} />
     </div>
   );
 };
