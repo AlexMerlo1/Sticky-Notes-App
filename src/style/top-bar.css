@@ -1,0 +1,13 @@
+.top-bar{
+    display: flex;
+    height: 100px;
+    width: 100%;
+    left: 0;
+    top: 0;
+    position: fixed;
+    justify-content: flex-end;
+
+    .link-item {
+        margin-right: 20px;
+    }
+}

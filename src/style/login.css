@@ -1,0 +1,30 @@
+.login-container{
+    width: 50%;
+    height: 50%;
+    left: 25%;
+    top: 25%;
+    position: absolute;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+
+    /* background-color: rgb(254, 237, 86); */
+
+    .flex-child {
+
+        margin-top: 20px;
+
+        input[type=text], input[type=password] {
+            margin-left: 10px;
+            size: 16px;
+            width: 500px;
+            display: block;
+        }
+        
+        input[type=submit] {
+            font-size: large;
+        }
+    }
+}
