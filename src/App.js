@@ -1,28 +1,29 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import ReactDOM from "react-dom/client";
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+import DashBoard from './components/dashboard';
+import Login from './components/login';
+import Signup from './components/signup';
 
-import StickyNote from "./stickynote";
-
+/**
+ * Entrypoint of react application; handles routing the application
+ * by using {@link BrowserRouter}
+ * @returns React Application
+ */
 const App = () => {
-  const [mouseX, setMouseX] = useState(0);
-  const [mouseY, setMouseY] = useState(0);
-
-  useEffect(() => {
-    //app wide mouse move listener
-    const handleMouseMove = (event) => {
-      setMouseX(event.clientX);
-      setMouseY(event.clientY);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
 
   return (
-    <div>
-      <StickyNote mouseX={mouseX} mouseY={mouseY} />
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Login />}/>
+      <Route path="/signup" element={<Signup />}/>
+      <Route path="/dashboard" element={<DashBoard />}/>
+    </Routes>
+  </BrowserRouter>
   );
 };
 
