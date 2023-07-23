@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie'
 import '../style/login.css'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { hostname } from "../utils/constants";
+import { Button, Form, Nav } from "react-bootstrap";
 
 /**
  * Login component for the Sticky Notes App that allows a user to login
@@ -15,7 +16,7 @@ export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [cookies, setCookie] = useCookies(["todo-sso"])
-    const [errMsg, setErrMsg] = useState("")
+    const [errMsg, setErrMsg] = useState({msg: "", flag: false})
     const location = useLocation();
     const navigate = useNavigate();
     
@@ -47,63 +48,60 @@ export default function Login() {
                 })
                 .catch (err => {
                     console.log(err)
-                    setErrMsg(err.response.data)
+                    setErrMsg({msg: err.response.data, flag: true})
                 })
             })
             .catch(err => {
                 console.error(err)
-                setErrMsg(err.response.data)
+                setErrMsg({msg: err.response.data, flag: true})
             })
     }
-    const htmlMsg = (location.state !== null) ? <h3>{location.state.msg}</h3> : <h3></h3>
-    const errorMsg = (errMsg !== "") ? <h3 style={{color: "red"}}>{errMsg}</h3>: <h3></h3>
+    const htmlMsg = (location.state !== null) ? location.state.msg : ""
+    const errorMsg = (errMsg !== "") ? errMsg.msg: ""
 
     /**
      * React render function to render the login component
      */
     return (
-        <div>
-            <form onSubmit={onSubmit} className="login-container">
-                <h1>Sticky Notes!</h1>
-                <h2>Login</h2>
-                {htmlMsg}
-                {errMsg}
-                <div className="flex-child">
-                    <label>Username: </label>
-                    <input 
-                        type="text"
-                        value={username}
-                        onChange={e => {setUsername(e.target.value)}}
-                    />
+        <div className="dashboard-page">
+            <Form noValidate validated={(errMsg.flag)} onSubmit={onSubmit} className="login-container login-width border border-primary rounded shadow">
+                <h2 className="form-headers">Sticky Notes!</h2>
+                <h3 className="form-headers">Login</h3>
+                <p className="form-headers">{htmlMsg}</p>
+                <p className="form-headers">{errorMsg}</p>
+                <Form.Group className="mb-3 form-item" controlId="formUsername">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control required type="email" placeholder="Enter Email..." onChange={e => {setUsername(e.target.value)}} value={username}/>
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                        Please enter a valid email address.
+                    </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group className="mb-3 form-item" controlId="formPassword" >
+                    <Form.Label>Password: </Form.Label>
+                    <Form.Control required type="password" placeholder="Enter Password..." onChange={e => {setPassword(e.target.value)}} value={password}/>
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                        Please enter the password linked to your account
+                    </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group className="mb-3  form-item" controlId="formRememberMe">
+                    <Form.Check type="checkbox" label="Remeber Me"/>
+                </Form.Group>
+                <Button variant="primary" type="submit" className="form-button">
+                    Submit
+                </Button>
+                <div className="flex-child form-links">
+                    <Nav>
+                        <Nav.Item>
+                            <Nav.Link href="/signup">SignUp</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link href="/forgot">Forgot Credentials</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
                 </div>
-                <div className="flex-child">
-                    <label>Password: </label>
-                    <input 
-                        type="password"
-                        value={password}
-                        onChange={e => {setPassword(e.target.value)}}
-                    />
-                </div>
-                <div className="flex-child">
-                    <input 
-                        type="submit"
-                    />
-                </div>
-                <div className="flex-child">
-                    <div>
-                        <label>Dont have an account: </label>
-                        <Link to={"/signup"}>
-                            Signup
-                        </Link>
-                    </div>
-                    <div>
-                        <label>Forgot credentials: </label>
-                        <Link to={"/forgot"}>
-                            Recover Credentials
-                        </Link>
-                    </div>
-                </div>
-            </form>
+            </Form>
         </div>
     )
 }

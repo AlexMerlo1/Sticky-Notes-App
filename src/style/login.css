@@ -1,16 +1,51 @@
-.login-container{
-    width: 50%;
-    height: 50%;
-    left: 25%;
-    top: 25%;
+.dashboard-page {
+    min-width: 100%;
+    min-height: 100%;
     position: absolute;
-    border: 2px solid black;
+    background-color: aliceblue;
+}
+
+.signup-width {
+    width: 50%;
+}
+
+.login-width {
+    width: 30%;
+}
+
+.login-container{
+    height: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    text-align: center;
+    background-color: white;
 
-    /* background-color: rgb(254, 237, 86); */
+    .stack-margin {
+        margin-right: 7%;
+    }
+
+    .form-headers {
+        text-align: center;
+    }
+
+    .form-item {
+        width: 90%;
+        margin-left: 20px;
+    }
+
+    .form-button {
+        align-self: center;
+        width: 100px;
+    }
+
+    .form-links {
+        text-align: center;
+        align-self: center;
+    }
 
     .flex-child {
 
