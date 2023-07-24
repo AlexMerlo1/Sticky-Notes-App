@@ -1,12 +1,14 @@
-import React from "react";
-import { useState, useEffect } from "react";
 import TopBar from "./topbar";
+import NoteList from "./noteList";
 
 export default function DashBoardList() {
 
     return (
-        <div>
-            <TopBar />
-        </div>
+        <>
+            <div>
+                <TopBar />
+                <NoteList />
+            </div>
+        </>
     )
 }
