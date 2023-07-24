@@ -1,65 +1,61 @@
 .dashboard-page {
-    min-width: 100%;
-    min-height: 100%;
-    position: absolute;
-    background-color: aliceblue;
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  background-color: aliceblue;
 }
 
 .signup-width {
-    width: 50%;
+  width: 50%;
 }
 
 .login-width {
-    width: 30%;
+  width: 30%;
 }
 
-.login-container{
-    height: 60%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    background-color: white;
+.login-container {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  padding: 1.5rem 0;
+}
+.stack-margin {
+  margin-right: 7%;
+}
 
-    .stack-margin {
-        margin-right: 7%;
-    }
+.form-headers {
+  text-align: center;
+}
 
-    .form-headers {
-        text-align: center;
-    }
+.form-item {
+  width: 90%;
+  margin-left: 20px;
+}
 
-    .form-item {
-        width: 90%;
-        margin-left: 20px;
-    }
+.form-button {
+  align-self: center;
+  width: 100px;
+}
 
-    .form-button {
-        align-self: center;
-        width: 100px;
-    }
+.form-links {
+  text-align: center;
+  align-self: center;
+}
 
-    .form-links {
-        text-align: center;
-        align-self: center;
-    }
+.flex-child {
+  margin-top: 20px;
+}
+input[type="text"],
+input[type="password"] {
+  size: 16px;
+  display: block;
+}
 
-    .flex-child {
-
-        margin-top: 20px;
-
-        input[type=text], input[type=password] {
-            margin-left: 10px;
-            size: 16px;
-            width: 500px;
-            display: block;
-        }
-        
-        input[type=submit] {
-            font-size: large;
-        }
-    }
+input[type="submit"] {
+  font-size: large;
 }
