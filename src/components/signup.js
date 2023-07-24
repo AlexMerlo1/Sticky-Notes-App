@@ -5,6 +5,7 @@ import { Link,useNavigate} from "react-router-dom";
 import '../style/login.css'
 import { months, days, years } from "../utils/constants";
 import { hostname } from "../utils/constants";
+import { Button, Form, Nav, Stack } from "react-bootstrap";
 
 /**
  * Signup component for the Sticky Notes App that allows a user to signup
@@ -19,7 +20,8 @@ export default function Signup() {
     const [month, setMonth] = useState(1)
     const [day, setDay] = useState(-1)
     const [year, setYear] = useState(-1)
-    const [errMsg, setError] = useState("")
+    const [date, setDate] = useState(new Date().toISOString().substring(0,10))
+    const [errMsg, setErrMsg] = useState({msg: "", flag: false})
     const [isSignedUp, setSignedUp] = useState(false)
     const navigate = useNavigate();
 
@@ -32,20 +34,20 @@ export default function Signup() {
         e.preventDefault()
 
         if (password !== confirmPass) {
-            setError("Passwords do not match")
+            setErrMsg({msg: "Passwords do not match", flag: true})
             return
         }
 
-        let date = new Date()
-        date.setMonth(month-1)
-        date.setDate(day)
-        date.setFullYear(year)
+        // let date = new Date()
+        // date.setMonth(month-1)
+        // date.setDate(day)
+        // date.setFullYear(year)
 
         const newUser = {
             email: username,
             pass: sha256.create().update(password).hex(),
             name: name,
-            dob: date.toISOString().substring(0,10),
+            dob: date,
             is_verified: true
         }
 
@@ -56,6 +58,7 @@ export default function Signup() {
             })
             .catch(err => {
                 console.error(err)
+                setErrMsg({msg: err.response.data, flag: true})
             })
     }
 
@@ -66,78 +69,65 @@ export default function Signup() {
      * React render function to render the {@link Signup} Componenet
      */
     return (
-        <div>
-            <form onSubmit={onSubmit} className="login-container">
-                <h1>Sicky Notes!</h1>
-                <h2>Signup</h2>
-                <h3 style={{color: "red"}}>{errMsg}</h3>
-                <div className="flex-child">
-                    <label>Email: </label>
-                    <input 
-                        type="text"
-                        value={username}
-                        onChange={e => {setUsername(e.target.value)}}
-                    />
-                    <label style={{marginLeft: '20px'}}>Password: </label>
-                    <input 
-                        type="password"
-                        value={password}
-                        onChange={e => {setPassword(e.target.value)}}
-                    />
-                </div>
-                <div className="flex-child">
-                    <label>Confirm Password: </label>
-                    <input 
-                        type="password"
-                        value={confirmPass}
-                        onChange={e => {setConfirmPass(e.target.value)}}
-                    />
-                    <label style={{marginLeft: "20px"}}>Name: </label>
-                    <input 
-                        type="text"
-                        value={name}
-                        onChange={e => {setName(e.target.value)}}
-                    />
-                </div>
-                <div className="flex-child">
-                    <h3>Date of Birth: </h3>
-                    <label>Month: </label>
-                    <select value={month}
-                        onChange={e => {setMonth(e.target.value)}}>
-                        {months.map((m) => {
-                            return <option key={m} value={m}>
-                                {m}
-                            </option>
-                        })}
-                    </select>
-                    <label style={{marginLeft: "20px"}}>Day: </label>
-                    <select value={day}
-                        onChange={e => {setDay(e.target.value)}}>
-                            {daysArr.map((d) => {
-                                return <option key={d} value={d}>
-                                    {d}
-                                </option>
-                            })}
-                    </select>
-                    <label style={{marginLeft: "20px"}}> Year: </label>
-                    <select value={year}
-                        onChange={e => {setYear(e.target.value)}}>
-                            {years.map(y => {
-                                return <option key={y} value={y}>
-                                    {y}
-                                </option>
-                            })}
-                    </select>
-                </div>
-                <div className="flex-child">
-                    <input 
-                        type="submit"
-                    />
-                    <Link to={"/"}>
-                            Back
-                    </Link>
-                </div>
-            </form>
+        <div className="dashboard-page">
+            <Form noValidate validated={(errMsg.flag)} onSubmit={onSubmit} className="login-container signup-width border border-primary rounded shadow">
+                <h2 className="form-headers">Sticky Notes!</h2>
+                <h3 className="form-headers">Login</h3>
+                <p style={{color: "red"}}>{errMsg.msg}</p>
+                <Form.Group className="mb-3 form-item" controlId="formEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control required type="email" placeholder="Enter Email..." onChange={e => {setUsername(e.target.value)}} value={username}/>
+                    <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                        Please enter a valid email
+                    </Form.Control.Feedback>
+                </Form.Group>
+                <Stack direction="horizontal" gap={1} className="stack-margin">
+                    <Form.Group className="mb-3 form-item" controlId="formPass">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control required type="password" placeholder="Enter Password..." onChange={e => {setPassword(e.target.value)}} value={password}/>
+                        <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                            Please enter a valid password
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group className="mb-3 form-item" controlId="formConfirmPass">
+                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Control required type="password" placeholder="Confirm Password..." onChange={e => {setConfirmPass(e.target.value)}} value={confirmPass}/>
+                        <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                            Passwords do not match
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Stack>
+                <Stack direction="horizontal" gap={1} className="stack-margin">
+                    <Form.Group className="mb-3 form-item" controlId="formName">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control required type="text" placeholder="Enter Name..." onChange={e => {setName(e.target.value)}} value={name}/>
+                        <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                            Please enter a name
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group style={{marginBottom: "15px"}}>
+                        <Form.Label>Date Of Birth</Form.Label>
+                        <Form.Control required type="date" onChange={e => {
+                                console.log(e.target.value)
+                                setDate(e.target.value)
+                            }} value={date}/>
+                    </Form.Group>
+                </Stack>
+                <Stack direction="horizontal" gap={1} style={{alignSelf: "center"}}>
+                    <Button variant="primary" type="submit" className="form-button">
+                        Submit
+                    </Button>
+                    <Nav>
+                        <Nav.Item>
+                            <Nav.Link href="/">Back</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                </Stack>
+            </Form>
         </div>
     )
 
