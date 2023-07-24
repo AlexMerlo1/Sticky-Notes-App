@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import "../style/stickynote.css";
 
 const StickyNote = ({ mouseX, mouseY }) => {
   const [note, setNote] = useState("");
