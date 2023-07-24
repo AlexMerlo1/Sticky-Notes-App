@@ -46,6 +46,11 @@ export default function DashBoard() {
       <button className="add-note-button" onClick={addNote}>
         Add Note
       </button>
+      <div className="heading-container">
+        <h1>To Do</h1>
+        <h1>In Progress</h1>
+        <h1>Complete</h1>
+      </div>
       <div className="sticky-note-container">
         {notes.map((note) => (
           <StickyNote key={note.id} mouseX={mouseX} mouseY={mouseY} />

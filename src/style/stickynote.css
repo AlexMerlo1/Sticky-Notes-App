@@ -16,6 +16,7 @@
     font-family: 'Roboto', sans-serif;
     overflow: auto;
     resize: none;
+    background-color: inherit;
 }
 
 .pushpin{
@@ -27,5 +28,4 @@
     cursor: move;
     background-color: red;
     border-radius: 50%;
-    translate: (-50%, -50%);
 }

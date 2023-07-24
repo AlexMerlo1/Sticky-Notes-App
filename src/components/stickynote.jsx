@@ -6,6 +6,7 @@ const StickyNote = ({ mouseX, mouseY }) => {
   const posX = useRef(0);
   const posY = useRef(0);
   const [mouseHold, setMouseHold] = useState(false);
+  const windowWidth = useRef(window.innerWidth);
   const handleNoteChange = (event) => {
     setNote(event.target.value);
   };
@@ -35,6 +36,12 @@ const StickyNote = ({ mouseX, mouseY }) => {
         left: posX.current + "px",
         top: posY.current + "px",
         position: mouseHold ? "absolute" : "",
+        backgroundColor:
+          posX.current < windowWidth.current / 3
+            ? "#f5f5f5"
+            : posX.current < (windowWidth.current / 3) * 2
+            ? "orange"
+            : "green",
       }}
     >
       <div
