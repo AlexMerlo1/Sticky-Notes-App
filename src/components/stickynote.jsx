@@ -6,7 +6,6 @@ const StickyNote = ({ mouseX, mouseY }) => {
   const posX = useRef(0);
   const posY = useRef(0);
   const [mouseHold, setMouseHold] = useState(false);
-
   const handleNoteChange = (event) => {
     setNote(event.target.value);
   };
@@ -24,23 +23,26 @@ const StickyNote = ({ mouseX, mouseY }) => {
   };
 
   if (mouseHold) {
-    //garbage bug fix
     posX.current = mouseX;
     posY.current = mouseY;
   }
 
   return (
     <div
-      onMouseDown={onMouseDown}
-      onMouseUp={onMouseUp}
       className="sticky-note"
+      onMouseUp={onMouseUp}
       style={{
         left: posX.current + "px",
         top: posY.current + "px",
         position: mouseHold ? "absolute" : "",
       }}
     >
-      <input type="text" value={note} onChange={handleNoteChange} />
+      <div
+        className="pushpin"
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+      ></div>
+      <textarea value={note} onChange={handleNoteChange} />
     </div>
   );
 };
