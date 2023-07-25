@@ -7,6 +7,7 @@ const StickyNote = ({ mouseX, mouseY }) => {
   const posY = useRef(0);
   const [mouseHold, setMouseHold] = useState(false);
   const windowWidth = useRef(window.innerWidth);
+
   const handleNoteChange = (event) => {
     setNote(event.target.value);
   };
@@ -24,8 +25,13 @@ const StickyNote = ({ mouseX, mouseY }) => {
   };
 
   if (mouseHold) {
-    posX.current = mouseX;
-    posY.current = mouseY;
+    if (mouseX < windowWidth.current - 200) {
+      posX.current = mouseX;
+      posY.current = mouseY;
+    } else {
+      posX.current = windowWidth.current - 200;
+      posY.current = mouseY;
+    }
   }
 
   return (
@@ -35,7 +41,6 @@ const StickyNote = ({ mouseX, mouseY }) => {
       style={{
         left: posX.current + "px",
         top: posY.current + "px",
-        position: mouseHold ? "absolute" : "",
         backgroundColor:
           posX.current < windowWidth.current / 3
             ? "#f5f5f5"
@@ -44,11 +49,9 @@ const StickyNote = ({ mouseX, mouseY }) => {
             : "green",
       }}
     >
-      <div
-        className="pushpin"
-        onMouseDown={onMouseDown}
-        onMouseUp={onMouseUp}
-      ></div>
+      <div className="pushpin" onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+        <div className="pin-child"></div>
+      </div>
       <textarea value={note} onChange={handleNoteChange} />
     </div>
   );
