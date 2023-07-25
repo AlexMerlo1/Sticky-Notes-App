@@ -56,6 +56,10 @@ export default function DashBoard() {
           <StickyNote key={note.id} mouseX={mouseX} mouseY={mouseY} />
         ))}
       </div>
+      <div class="vl">
+      </div>
+      <div className="vl2">
+        </div>
     </div>
   );
 }
