@@ -39,7 +39,103 @@
 /*---------------------------*/
 
 .note-list {
-  padding-top: 60px;
+  padding-top: 90px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  max-width: 90rem;
+  margin: auto;
+  gap: 1rem;
+}
+
+.note {
+  padding: 26px 15px 10px 26px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.note-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.todo {
+  background-color: #f1f3f5;
+  transition: all 200ms;
+}
+
+.todo:hover {
+  background-color: #e9ecef;
+}
+
+.inProgress {
+  background-color: #ffd8a8;
+  transition: all 200ms;
+}
+.inProgress:hover {
+  background-color: #ffe0b9;
+}
+.done {
+  background-color: #b2f2bb;
+  transition: all 200ms;
+}
+.done:hover {
+  background-color: #a0daa8;
+}
+
+.note-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.note-flex p {
+  margin: 0;
+}
+.icon-action {
+  display: flex;
+  gap: 5px;
+}
+.icon-action button {
+  border: none;
+  background-color: #212529;
+  border-radius: 100%;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  transition: all;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  color: #f8f9fa;
+}
+
+.icon-close {
+  color: #212529;
+  width: 25px;
+  height: 25px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+}
+
+.icon-action button:hover {
+  background-color: #1e2125;
+}
+
+.not-date {
+  color: #4d5154;
+  font-size: 15px;
 }
 
 .vl {
