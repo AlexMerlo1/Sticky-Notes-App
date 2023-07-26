@@ -24,10 +24,8 @@ const StickyNote = ({ mouseX, mouseY, id, getId }) => {
   };
 
   const onMouseUp = () => {
-    if (mouseHold) {
-      setMouseHold(false);
-      console.log("mouse up");
-    }
+    setMouseHold(false);
+    console.log("mouse up");
   };
 
   if (mouseHold) {
@@ -57,6 +55,9 @@ const StickyNote = ({ mouseX, mouseY, id, getId }) => {
     <div
       className="sticky-note"
       onMouseUp={onMouseUp}
+      onMouseLeave={() => {
+        console.log("mouse leave note");
+      }}
       style={{
         left: posX.current + "px",
         top: posY.current + "px",
@@ -68,7 +69,14 @@ const StickyNote = ({ mouseX, mouseY, id, getId }) => {
             : "green",
       }}
     >
-      <div className="pushpin" onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+      <div
+        className="pushpin"
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        onMouseLeave={() => {
+          console.log("mouse leave pin");
+        }}
+      >
         <div className="pin-child"></div>
       </div>
       <textarea value={note} onChange={handleNoteChange} />

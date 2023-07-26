@@ -1,11 +1,12 @@
 .top-bar{
     display: flex;
-    height: 3%;
+    height: 5%;
     width: 100%;
     left: 0;
     top: 0;
     position: fixed;
     justify-content: flex-end;
+    user-select: none;
 
     .link-item {
         margin-right: 20px;
