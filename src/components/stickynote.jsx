@@ -2,11 +2,21 @@ import { useState, useRef } from "react";
 import "../style/stickynote.css";
 import HeaderArea from "./header-area";
 
-const StickyNote = ({ mouseX, mouseY, id, getId }) => {
-  const [note, setNote] = useState("");
-  const [type, setType] = useState("todo");
-  const posX = useRef(0);
-  const posY = useRef(0);
+const getStartingType = (posx, windowWidth) => {
+  if (posx < windowWidth.current / 3) {
+    return "todo"
+  } else if (posx < (windowWidth.current / 3) * 2) {
+    return "inProgress"
+  } else {
+    return "done"
+  }
+}
+
+const StickyNote = ({ mouseX, mouseY, id, getId, posx, posy, content }) => {
+  const [note, setNote] = useState(content);
+  const [type, setType] = useState(getStartingType(posx, useRef(window.innerWidth)));
+  const posX = useRef((posx !== undefined) ? posx : 0);
+  const posY = useRef((posy !== undefined) ? posy : 0);
   const [mouseHold, setMouseHold] = useState(false);
   const windowWidth = useRef(window.innerWidth);
 
@@ -29,10 +39,8 @@ const StickyNote = ({ mouseX, mouseY, id, getId }) => {
   };
 
   const onMouseUp = () => {
-    if (mouseHold) {
-      setMouseHold(false);
-      console.log("mouse up");
-    }
+    setMouseHold(false);
+    console.log("mouse up");
   };
 
   if (mouseHold) {
@@ -66,6 +74,9 @@ const StickyNote = ({ mouseX, mouseY, id, getId }) => {
     <div
       className="sticky-note"
       onMouseUp={onMouseUp}
+      onMouseLeave={() => {
+        console.log("mouse leave note");
+      }}
       style={{
         left: posX.current + "px",
         top: posY.current + "px",
@@ -78,7 +89,14 @@ const StickyNote = ({ mouseX, mouseY, id, getId }) => {
       }}
       
     >
-      <div className="pushpin" onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+      <div
+        className="pushpin"
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        onMouseLeave={() => {
+          console.log("mouse leave pin");
+        }}
+      >
         <div className="pin-child"></div>
       </div>
       <HeaderArea value={note} onChange={handleHeaderChange} />

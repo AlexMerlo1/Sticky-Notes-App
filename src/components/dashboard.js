@@ -17,9 +17,9 @@ export default function DashBoard() {
   const [mouseY, setMouseY] = useState(0);
   const [currentDraggedNote, setCurrentDraggedNote] = useState(null);
   const location = useLocation();
-  const [todos, setTodos] = useState(location.state);
+  // const [todos, setTodos] = useState(location.state);
   const [cookies, setCookie] = useCookies(["todo-sso"]);
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(location.state);
 
   /**
    * Event listener for handling mouse movement across the entire dashboard
@@ -56,11 +56,7 @@ export default function DashBoard() {
       <button className="add-note-button" onClick={addNote}>
         Add Note
       </button>
-      <div className="heading-container">
-        <h1>To Do</h1>
-        <h1>In Progress</h1>
-        <h1>Complete</h1>
-      </div>
+
       <div className="sticky-note-container">
         {notes.map((note) => (
           <StickyNote
@@ -69,6 +65,9 @@ export default function DashBoard() {
             mouseY={mouseY}
             id={note.id}
             getId={getNoteId}
+            posx={note.posX*1.5}
+            posy={(note.posY+100)%500}
+            content={note.content}
           />
         ))}
         <div
@@ -91,10 +90,11 @@ export default function DashBoard() {
           </svg>
         </div>
       </div>
-      <div class="vl">
-      </div>
-      <div className="vl2">
-        </div>
+      <h1 className="todo header">To Do</h1>
+      <div className="vl"></div>
+      <h1 className="inProgress header">In Progress</h1>
+      <div className="vl2"></div>
+      <h1 className="done header">Done</h1>
     </div>
   );
 }
