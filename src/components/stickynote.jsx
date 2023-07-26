@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import "../style/stickynote.css";
 
-const StickyNote = ({ mouseX, mouseY }) => {
+const StickyNote = ({ mouseX, mouseY, id, getId }) => {
   const [note, setNote] = useState("");
+  const [type, setType] = useState("todo");
   const posX = useRef(0);
   const posY = useRef(0);
   const [mouseHold, setMouseHold] = useState(false);
@@ -12,8 +13,13 @@ const StickyNote = ({ mouseX, mouseY }) => {
     setNote(event.target.value);
   };
 
+  const sendId = () => {
+    getId(id);
+  };
+
   const onMouseDown = () => {
     setMouseHold(true);
+    sendId();
     console.log("mouse down");
   };
 
@@ -32,6 +38,19 @@ const StickyNote = ({ mouseX, mouseY }) => {
       posX.current = windowWidth.current - 200;
       posY.current = mouseY;
     }
+    if (posX.current < windowWidth.current / 3) {
+      if (type !== "todo") {
+        setType("todo");
+      }
+    } else if (posX.current < (windowWidth.current / 3) * 2) {
+      if (type !== "inProgress") {
+        setType("inProgress");
+      }
+    } else {
+      if (type !== "done") {
+        setType("done");
+      }
+    }
   }
 
   return (
@@ -42,9 +61,9 @@ const StickyNote = ({ mouseX, mouseY }) => {
         left: posX.current + "px",
         top: posY.current + "px",
         backgroundColor:
-          posX.current < windowWidth.current / 3
-            ? "#f5f5f5"
-            : posX.current < (windowWidth.current / 3) * 2
+          type === "todo"
+            ? "white"
+            : type === "inProgress"
             ? "orange"
             : "green",
       }}
