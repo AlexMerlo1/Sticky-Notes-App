@@ -65,8 +65,8 @@ export default function DashBoard() {
             mouseY={mouseY}
             id={note.id}
             getId={getNoteId}
-            posx={note.posX*1.5}
-            posy={(note.posY+100)%500}
+            posx={note.posX * 1.5}
+            posy={(note.posY + 100) % 500}
             content={note.content}
           />
         ))}

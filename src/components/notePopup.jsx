@@ -9,9 +9,6 @@ function NotePopup({ note, close, onUpdate }) {
     setText(e.target.value);
   }
 
-  console.log(note);
-  console.log(text);
-
   return (
     <Modal
       size="lg"

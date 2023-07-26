@@ -29,7 +29,7 @@ function Note({ note, bg, onDelete, onEdit }) {
       <div className={`note ${bg}`} onClick={handleNoteOpen}>
         <p className={"note-text"}> {note.text} </p>
         <div className="note-flex">
-          <p className="not-date">date</p>
+          <p className="note-date">date</p>
           <div className="icon-action">
             <button onClick={handleDelete}>
               <svg
