@@ -17,19 +17,19 @@
   user-select: none;
 }
 
-.todo {
+.todo-heading{
   position: relative;
   width: 30%;
   left: 10px;
 }
 
-.inProgress {
+.inProgress-heading{
   position: relative;
   width: 30%;
   left: 40px;
 }
 
-.done {
+.done-heading{
   position: relative;
   width: 30%;
   left: 70px;

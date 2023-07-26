@@ -90,11 +90,11 @@ export default function DashBoard() {
           </svg>
         </div>
       </div>
-      <h1 className="todo header">To Do</h1>
+      <h1 className="todo-heading todo header">To Do</h1>
       <div className="vl"></div>
-      <h1 className="inProgress header">In Progress</h1>
+      <h1 className="inProgress-heading inProgress header">In Progress</h1>
       <div className="vl2"></div>
-      <h1 className="done header">Done</h1>
+      <h1 className="done-heading done header">Done</h1>
     </div>
   );
 }
