@@ -1,32 +1,38 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "../style/dashboard.css";
 import NotePopup from "./notePopup";
 
 function Note({ note, bg, onDelete, onEdit }) {
   const [popup, setPopup] = useState(false);
+  const notRef = useRef();
 
   function handleDelete(e) {
     e.stopPropagation();
-    onDelete(note.id);
+    removeNote(note.id);
   }
+
+  function removeNote(id) {
+    notRef.current.classList.add("removing");
+    setTimeout(() => onDelete(id), 500);
+  }
+
   function handleNoteOpen() {
     setPopup(true);
   }
 
   function handleUpdate(id, text) {
     if (!text) {
-      onDelete(id);
+      removeNote(id);
       setPopup(false);
       return;
     }
-    console.log(id);
     setPopup(false);
     onEdit(id, text);
   }
 
   return (
     <>
-      <div className={`note ${bg}`} onClick={handleNoteOpen}>
+      <div className={`note ${bg}`} onClick={handleNoteOpen} ref={notRef}>
         <p className={"note-text"}> {note.text} </p>
         <div className="note-flex">
           <p className="note-date">date</p>
