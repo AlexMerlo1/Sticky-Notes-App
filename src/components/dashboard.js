@@ -56,11 +56,7 @@ export default function DashBoard() {
       <button className="add-note-button" onClick={addNote}>
         Add Note
       </button>
-      <div className="heading-container">
-        <h1>To Do</h1>
-        <h1>In Progress</h1>
-        <h1>Complete</h1>
-      </div>
+
       <div className="sticky-note-container">
         {notes.map((note) => (
           <StickyNote
@@ -94,10 +90,11 @@ export default function DashBoard() {
           </svg>
         </div>
       </div>
-      <div className="vl">
-      </div>
-      <div className="vl2">
-        </div>
+      <h1 className="todo header">To Do</h1>
+      <div className="vl"></div>
+      <h1 className="inProgress header">In Progress</h1>
+      <div className="vl2"></div>
+      <h1 className="done header">Done</h1>
     </div>
   );
 }
