@@ -21,4 +21,5 @@ function HeaderArea() {
   );
 }
 
+
 export default HeaderArea;
