@@ -10,6 +10,7 @@
 .sticky-note textarea{
     width: 90%;
     height: 90%;
+    margin-top: 10%;
     border: none;
     outline: none;
     font-size: 1.2rem;
@@ -18,6 +19,8 @@
     resize: none;
     background-color: inherit;
 }
+
+
 
 .pushpin{
     position: absolute;
