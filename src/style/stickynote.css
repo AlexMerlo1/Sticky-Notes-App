@@ -11,6 +11,9 @@
 .sticky-note textarea{
     width: 90%;
     height: 90%;
+    height: 80%;
+    margin-top: -15%;
+    margin-left: 5%;
     border: none;
     outline: none;
     font-size: 1.2rem;
@@ -20,6 +23,25 @@
     background-color: inherit;
     z-index: 1;
 }
+
+.header-area{
+    display: absolute;
+    width: 75%;
+    height: 10%;
+    margin-left: 25px;
+    margin-top: 2%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+    resize: none;
+    font-size: clamp(12px, 4vw, 8px);
+    background-color: inherit;
+    justify-content: center;
+    align-items: center;
+}
+
 
 
 

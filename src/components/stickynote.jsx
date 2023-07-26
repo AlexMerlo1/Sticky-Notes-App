@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import "../style/stickynote.css";
+import HeaderArea from "./header-area";
 
 const getStartingType = (posx, windowWidth) => {
   if (posx < windowWidth.current / 3) {
@@ -21,6 +22,10 @@ const StickyNote = ({ mouseX, mouseY, id, getId, posx, posy, content }) => {
 
   const handleNoteChange = (event) => {
     setNote(event.target.value);
+  };
+
+  const handleHeaderChange = (event) => {
+    setNote(event.target.value)
   };
 
   const sendId = () => {
@@ -60,7 +65,11 @@ const StickyNote = ({ mouseX, mouseY, id, getId, posx, posy, content }) => {
       }
     }
   }
-
+  <textarea
+    value={note}
+    onChange={handleHeaderChange}
+    placeholder="Enter your header text"
+  ></textarea>
   return (
     <div
       className="sticky-note"
@@ -78,6 +87,7 @@ const StickyNote = ({ mouseX, mouseY, id, getId, posx, posy, content }) => {
             ? "orange"
             : "green",
       }}
+      
     >
       <div
         className="pushpin"
@@ -89,6 +99,7 @@ const StickyNote = ({ mouseX, mouseY, id, getId, posx, posy, content }) => {
       >
         <div className="pin-child"></div>
       </div>
+      <HeaderArea value={note} onChange={handleHeaderChange} />
       <textarea value={note} onChange={handleNoteChange} />
     </div>
   );
